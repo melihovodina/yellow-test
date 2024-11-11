@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { Run } from "src/run/models/run.model";
 
 interface UserCreationAttrs {
   email: string;
@@ -27,4 +28,7 @@ export class User extends Model<User, UserCreationAttrs> {
     allowNull: false
   })
   password: string
+
+  @HasMany(() => Run)
+  runs: Run[];
 }

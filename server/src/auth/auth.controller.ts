@@ -7,8 +7,8 @@ import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @ApiOperation({ summary: "login to accoint" })
-  @ApiResponse({status: 200})
+  @ApiOperation({ summary: "login to account" })
+  @ApiResponse({status: 201})
   @Post('/login')
   login(@Body() userDto: CreateUserDto) {
     return this.authService.login(userDto)
