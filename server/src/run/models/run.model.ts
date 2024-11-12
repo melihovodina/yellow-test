@@ -41,6 +41,7 @@ export class Run extends Model<Run, RunCreationAttr> {
   })
   date: Date;
 
+  @ApiProperty({example: 1, description: 'runner id'})
   @ForeignKey(() => User)
   @Column({type: DataType.INTEGER})
   userId: number;
