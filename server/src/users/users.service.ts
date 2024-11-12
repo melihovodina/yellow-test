@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from './models/user.model';
 import { CreateUserDto } from './dtos/createUser.dto';
@@ -8,17 +8,39 @@ export class UsersService {
   constructor(@InjectModel(User) private userRepo: typeof User) {}
 
   async getAll() {
-    const users = await this.userRepo.findAll();
-    return users;
+    try {
+      const users = await this.userRepo.findAll();
+
+      if (!users || users.length === 0) {
+        throw new NotFoundException('Runs not found');
+      }
+
+      return users;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async getByEmail(email: string) {
-    const user = await this.userRepo.findOne({where: {email}});
-    return user;
+    try {
+      const user = await this.userRepo.findOne({where: {email}});
+
+      if (!user) {
+        throw new NotFoundException('Runs not found');
+      }
+
+      return user;
+    } catch (error) {
+      throw error
+    }
   }
 
   async create(dto: CreateUserDto) {
-    const user = await this.userRepo.create(dto)
-    return user
+    try {
+      const user = await this.userRepo.create(dto)
+      return user
+    } catch (error) {
+      throw error
+    }
   }
 }

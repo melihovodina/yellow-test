@@ -3,6 +3,8 @@ import { RunService } from './run.service';
 import { CreateRunDto } from './dtos/createRun.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { Run } from './models/run.model';
+import { WeeklyStatsDto } from './dtos/weeklyStats.dto';
+import { WeeklyStats } from './models/weeklyStats.model';
 
 @Controller('run')
 export class RunController {
@@ -41,5 +43,12 @@ export class RunController {
   @Delete('/:id')
   delete(@Param('id') id: number) {
     return this.runService.delete(id)
+  }
+
+  @ApiOperation({ summary: "get weekly stats for a user" })
+  @ApiResponse({ status: 200, type: [WeeklyStats]})
+  @Post('/weekly-stats')
+  async getWeeklyStats(@Body() dto: WeeklyStatsDto) {
+    return this.runService.calcWeeklyStats(dto);
   }
 }
