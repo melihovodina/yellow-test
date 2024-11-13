@@ -34,7 +34,7 @@ import * as path from "path";
     UsersModule,
     AuthModule,
     RunModule,
-    ImagesModule
+    ImagesModule,
   ],
   controllers: [],
   providers: [],
