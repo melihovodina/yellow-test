@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AuthGuard } from './auth/auth.guard';
+import { ValidationPipe } from './helpers/pipes/validation.pipe';
 
 async function bootstrap() {
   const PORT = process.env.PORT || 3000;
@@ -14,6 +15,7 @@ async function bootstrap() {
   SwaggerModule.setup('/api/docs', app, document);
 
   app.useGlobalGuards(app.get(AuthGuard))
+  app.useGlobalPipes(new ValidationPipe())
 
   await app.listen(PORT, () => console.log(`listening ${PORT} port...`));
 }

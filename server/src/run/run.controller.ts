@@ -1,10 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UsePipes } from '@nestjs/common';
 import { RunService } from './run.service';
 import { CreateRunDto } from './dtos/createRun.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { Run } from './models/run.model';
 import { WeeklyStatsDto } from './dtos/weeklyStats.dto';
 import { WeeklyStats } from './models/weeklyStats.model';
+import { ValidationPipe } from 'src/helpers/pipes/validation.pipe';
 
 @Controller('run')
 export class RunController {
