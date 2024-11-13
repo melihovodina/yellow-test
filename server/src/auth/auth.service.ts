@@ -52,4 +52,14 @@ export class AuthService {
     const user = await this.validateUser(userDto)
     return this.generateToken(user)
   }
+
+  async getUserId(authHeader: string) {
+    try {
+      const token = authHeader.split(' ')[1];
+      const decodedToken = await this.jwtService.verify(token);
+      return decodedToken.id;
+    } catch (error) {
+      throw new UnauthorizedException('Invalid token')
+    }
+  }
 }

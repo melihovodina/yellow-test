@@ -1,4 +1,5 @@
 import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { Image } from "src/images/models/image.model";
 import { Run } from "src/run/models/run.model";
 
 interface UserCreationAttrs {
@@ -31,4 +32,7 @@ export class User extends Model<User, UserCreationAttrs> {
 
   @HasMany(() => Run)
   runs: Run[];
+
+  @HasMany(() => Image)
+  images: Image[];
 }

@@ -12,7 +12,7 @@ export class UsersService {
       const users = await this.userRepo.findAll();
 
       if (!users || users.length === 0) {
-        throw new NotFoundException('Runs not found');
+        throw new NotFoundException('Users not found');
       }
 
       return users;
@@ -26,7 +26,7 @@ export class UsersService {
       const user = await this.userRepo.findOne({where: {email}});
 
       if (!user) {
-        throw new NotFoundException('Runs not found');
+        throw new NotFoundException('Users not found');
       }
 
       return user;
